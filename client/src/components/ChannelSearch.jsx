@@ -26,15 +26,17 @@ const ChannelSearch = () => {
   return (
     <div className="channel-search__container">
       <div className="channel-search__input__wrapper">
-        <SearchIcon />
+        <div className="channel-search__input__icon">
+          <SearchIcon />
+        </div>
+        <input
+          className="channel-search__input__text"
+          placeholder="Search"
+          type="text"
+          value={query}
+          onChange={onSearch}
+        />
       </div>
-      <input
-        className="channel-search__input__text"
-        placeholder="Search"
-        type="text"
-        value={query}
-        onChange={onSearch}
-      />
     </div>
   );
 };
