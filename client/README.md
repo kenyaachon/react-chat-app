@@ -68,3 +68,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Helpful website is
+node-postgres.com
+https://docs.docker.com/samples/postgresql_service/
+https://github.com/adrianhajdin/project_medical_pager_chat/blob/master/client/src/assets/AddChannel.js
