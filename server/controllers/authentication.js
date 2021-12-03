@@ -44,7 +44,7 @@ const login = async (request, response) => {
 
     const success = await bcrypt.compare(password, users[0].hashedPassword);
 
-    const token = serverClient.createUserToken(userId);
+    const token = serverClient.createUserToken(users[0].id);
 
     if (success) {
       response.status(200).json({
