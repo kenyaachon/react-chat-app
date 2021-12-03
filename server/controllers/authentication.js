@@ -1,12 +1,14 @@
 const { connect } = require("getstream");
 const bcrypt = require("bcrypt");
-const StreamChat = require("stream-chat");
+const StreamChat = require("stream-chat").StreamChat;
 const crypto = require("crypto");
 
+require("dotenv").config();
 const api_key = process.env.STREAM_API_KEY;
 const api_secret = process.env.STREAM_API_SECRET;
 const app_id = process.env.STREAM_APP_ID;
 const signup = async (request, response) => {
+  console.log("we are in the sign up process");
   try {
     const { fullName, username, password, phoneNumber } = request.body;
 
@@ -28,6 +30,7 @@ const signup = async (request, response) => {
 };
 
 const login = async (request, response) => {
+  console.log("logging user in");
   try {
     const { username, password } = request.body;
 
@@ -44,14 +47,12 @@ const login = async (request, response) => {
     const token = serverClient.createUserToken(userId);
 
     if (success) {
-      response
-        .status(200)
-        .json({
-          token,
-          fullName: users[0].fullName,
-          username,
-          userId: users[0].id,
-        });
+      response.status(200).json({
+        token,
+        fullName: users[0].fullName,
+        username,
+        userId: users[0].id,
+      });
     } else {
       response.status(500).json({ message: "Wrong Password" });
     }

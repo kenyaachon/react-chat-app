@@ -13,6 +13,8 @@ const initialState = {
   avatarURL: "",
 };
 
+const cookies = new Cookies();
+
 const Authentication = () => {
   const [form, setForm] = useState();
   const [isSignup, setIsSignup] = useState(true);
@@ -23,11 +25,41 @@ const Authentication = () => {
     //console.log(form);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     console.log(form);
+
+    const { fullName, username, password, phoneNumber, avatarURL } = form;
+
+    const URL = "http://localhost:5000/auth";
+
+    const {
+      data: { token, userId, hashedPassword },
+    } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
+      username,
+      password,
+      fullName,
+      phoneNumber,
+      avatarURL,
+    });
+
+    //store the data for the current cookie session
+    cookies.set("token", token);
+    cookies.set("username", username);
+    cookies.set("fullName", fullName);
+    cookies.set("userId", userId);
+
+    if (isSignup) {
+      cookies.set("phoneNumber", phoneNumber);
+      cookies.set("avatarURL", avatarURL);
+      cookies.set("hashedPassword", hashedPassword);
+    }
+
+    //reload current window
+    window.location.reload();
   };
+
   const switchMode = () => {
     setIsSignup(!isSignup);
   };
@@ -115,10 +147,7 @@ const Authentication = () => {
           </form>
           <div className="auth__form-container_fields-account">
             {isSignup ? "Already have an account? " : "Don't have an account? "}
-            <span onClick={switchMode}>
-              {" "}
-              {isSignup ? "Sign In" : "Sign Up"}
-            </span>
+            <span onClick={switchMode}>{isSignup ? "Sign In" : "Sign Up"}</span>
           </div>
         </div>
       </div>
