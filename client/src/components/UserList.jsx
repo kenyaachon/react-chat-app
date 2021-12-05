@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, useChatContext } from "stream-chat-react";
-import { List } from "stream-chat-react/dist/components/AutoCompleteTextarea/List";
 
 import { InviteIcon } from "../assets";
 
@@ -31,7 +30,7 @@ const UserItem = ({ user, setSelectedUsers }) => {
     setSelected(!selected);
   };
   return (
-    <div className="user-list__wrapper" onClick={handleSelected}>
+    <div className="user-item__wrapper" onClick={handleSelected}>
       <div className="user-item__name-wrapper">
         <Avatar image={user.image} name={user.fullName || user.id} size={32} />
         <p className="user-item__name">{user.fullName || user.id}</p>
