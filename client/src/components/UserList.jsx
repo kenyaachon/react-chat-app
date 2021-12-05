@@ -70,7 +70,7 @@ const UserList = ({ setSelectedUsers }) => {
       setLoading(false);
     };
     if (client) getUsers();
-  }, []);
+  }, [client, loading]);
 
   if (error) {
     return (
